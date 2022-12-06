@@ -1,0 +1,281 @@
+@import 'variables';
+@import 'mixins';
+
+
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: $very-light-grayish-blue;
+  font-family: $font-stack;
+  font-weight: $font-weight-500;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1, p {
+  overflow-wrap: break-word;
+}
+
+main {
+  max-width: 700px;
+  margin-inline: auto;
+}
+
+section {
+  background-color: $white;
+  padding: 1em 0;
+}
+
+
+// -----------------
+// Utilities
+// -----------------
+
+.color-transition {
+  transition: color 0.2s ease-in;
+}
+
+// -----------------
+// Header
+// -----------------
+
+.header {
+  @include flexProperty(space-between, center, null, null);
+  width: 90%;
+  padding: 1em 0 2em 0;
+  margin-inline: auto;
+
+  #{&}__title {
+    display: inline-flex;
+    gap: 0.5em;
+    font-size: 1.25rem;
+  }
+
+  #{&}__title--span {
+    background-color: $blue;
+    color: $white;
+    padding: 0.1em 0.65em;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+
+  #{&}__text {
+    color: $dark-grayish-blue;
+    font-size: 0.85rem;
+    display: inline-flex;
+    flex-direction: column;
+    overflow: hidden;
+    @extend .color-transition;
+  }
+
+  #{&}__text::after {
+    content: '';
+    width: 100%;
+    height: 0.1em;
+    background-color: $blue;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease-in;
+  }
+
+  #{&}__text:hover::after {
+    transform: translateX(0%);
+  }
+  
+  #{&}__text:hover {
+    cursor: pointer;
+    color: $blue;
+  }
+}
+
+
+// -----------------
+// Container
+// -----------------
+
+.container {
+  width: 90%;
+  margin-inline: auto;
+}
+
+
+// -----------------
+// Notification
+// -----------------
+
+.notification {
+  @include flexProperty(flex-start, flex-start, row, 1em);
+  padding: 1em;
+  border-radius: 5px;
+  transition: background-color 0.2s ease-out;
+
+  #{&}__message {
+    color: $grayish-blue;
+  }
+
+  #{&}__profile-img {
+    width: 40px;
+  }
+
+  #{&}__name {
+    font-weight: $font-weight-900;
+    color: #030303;
+    @extend .color-transition;
+  }
+
+  #{&}__post {
+    color: $dark-grayish-blue;
+    font-weight: 900;
+    @extend .color-transition;
+  }
+
+  #{&}__group {
+    color: $dark-grayish-blue;
+    font-weight: 900;
+    @extend .color-transition;
+  }
+  
+  #{&}__dot-symbol {
+    color: $red;
+    font-size: 1.25rem;
+    line-height: 0;
+  }
+  
+  #{&}__time {
+    color: $light-grayish-blue-2;
+    margin-top: 0.2em;
+  }
+  
+  #{&}__commented-picture {
+    width: 40px;
+  }
+  
+  #{&}__private-message-wrapper {
+    padding: 1em;
+    margin-top: 0.75em;
+    border: 1px solid $grayish-blue;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in;
+  }
+  
+  #{&}__private-message {
+    font-size: 0.825rem;
+    color: $dark-grayish-blue;
+  }
+  
+  #{&}__message, #{&}__time {
+    font-size: 0.85rem;
+    color: $grayish-blue;
+  }
+
+  #{&}__name:hover, #{&}__post:hover, #{&}__group:hover {
+    color: $blue;
+  }
+
+  #{&}__name:hover, #{&}__post:hover, #{&}__group:hover, #{&}__private-message-wrapper, #{&}__commented-picture:hover {
+    cursor: pointer;
+  }
+
+  #{&}__private-message-wrapper:hover {
+    background-color: darken($very-light-grayish-blue, 10%);
+  }
+}
+
+.notification + .notification {
+  margin-top: 1em;
+}
+
+.unread {
+  background-color: $very-light-grayish-blue;
+}
+
+.unread .notification__message::after {
+  content: '\2022';
+  color: red;
+}
+
+
+// -----------------
+// Footer
+// -----------------
+
+.footer {
+  padding-bottom: 1em;
+  font-size: 11px; 
+  text-align: center;
+
+  #{&}__link {
+    color: hsl(228, 45%, 44%);
+  }
+}
+
+
+// -----------------
+// Media queries
+// -----------------
+
+@include media-lg {
+
+  main {
+    margin: 5em auto;
+    border-radius: 10px;
+    box-shadow: 0 0 3px hsl(0, 0%, 30%);
+    overflow: hidden;
+  }
+
+  .header {
+    width: 95%;
+
+    #{&}__title {
+      font-size: 1.5rem;
+    }
+  
+    #{&}__title--span {
+      font-size: 1.25rem;
+    }  
+
+    #{&}__text {
+      font-size: 1rem;
+    }
+  }
+
+  .container {
+    width: 95%;
+    margin-inline: auto;
+  }
+
+  .notification {
+
+    #{&}__profile-img {
+      width: 45px;
+    }
+
+    #{&}__commented-picture {
+      width: 45px;
+      margin-left: auto;
+    }
+
+    #{&}__message, #{&}__time, #{&}__private-message {
+      font-size: 1rem;
+    }
+  }
+
+}
+
+
+
+
+
+
